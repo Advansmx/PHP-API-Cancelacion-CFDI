@@ -21,3 +21,11 @@ $advans = new \Advans\Api\CancelacionCFDI\Advans([
 $Uuid = 'FFFFFFFF-23F0-BA48-CD4E-405E97430D31';
 $response = $advans->ConsultarEstadoSolicitud($Uuid);
 ````
+
+## Configuración
+
+| Parámetro | Valor por defecto | Descripción |
+| :--- | :--- | :--- |
+| endpoint | null | URL de la API |
+| key | null | API Key |
+| use_exceptions | true | Define si una respuesta con error dispara un Exception
