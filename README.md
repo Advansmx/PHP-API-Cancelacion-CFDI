@@ -9,6 +9,15 @@
 $ composer require advans/php-api-cancelacion-cfdi
 ```
 
-## Ejemplos
+## Ejemplo
 
-_Ver carpeta "ejemplos"_
+````
+$advans = new \Advans\Api\CancelacionCFDI\Advans([
+    'endpoint' => 'https://dev.advans.mx/cfdi-cancelacion/json-rpc-2.0',
+    'key' => '**********************',
+    'use_exceptions' => false,
+]);
+
+$Uuid = 'FFFFFFFF-23F0-BA48-CD4E-405E97430D31';
+$response = $advans->ConsultarEstadoSolicitud($Uuid);
+````
