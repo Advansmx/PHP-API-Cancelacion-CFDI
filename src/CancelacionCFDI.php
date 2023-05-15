@@ -5,12 +5,39 @@ namespace Advans\Api\CancelacionCFDI;
 
 use Exception;
 
-class Advans {
+class CancelacionCFDI {
 
-    protected $config = [];
+    protected Config $config;
 
     public function __construct($config) {
-        $this->config = array_merge(['use_exceptions' => true], $config);
+        $this->config = $config;
+    }
+
+    public function GetDefinition(){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $this->config->endpoint,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Content-Type: application/json; charset=utf-8',
+                'Authorization: ' . $this->config->key,
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+        if (!$response) {
+            throw new Exception('No se obtuvo respuesta');
+        }
+        $response = json_decode($response);
+
+        if (isset($response->error)) {
+            if ($this->config->use_exceptions) {
+                throw new Exception(@$response->error->code . ': ' . @$response->error->string);
+            } else {
+                return $response;
+            }
+        }
     }
 
     public function Cancelar($PrivateKeyPem, $PublicKeyPem, $Uuid, $RfcReceptor, $Total, $Motivo, $FolioSustitucion = '') {
@@ -104,7 +131,7 @@ class Advans {
         $response = json_decode($response);
 
         if (isset($response->error)) {
-            if ($this->config['use_exceptions']) {
+            if ($this->config->use_exceptions) {
                 throw new Exception(@$response->error->code . ': ' . @$response->error->string);
             } else {
                 return $response;

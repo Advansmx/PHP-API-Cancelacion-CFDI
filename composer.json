@@ -1,10 +1,12 @@
 {
   "name": "advans/php-api-cancelacion-cfdi",
-  "description": "Librer\u0000a para consumid API de cancelacion de CFDI de Advans",
+  "description": "Librería para consumir API de cancelacion de CFDI de Advans",
   "type": "library",
   "require": {
-    "php": ">=5.6",
-    "ext-curl": "*"
+    "php": "^7.4|^8.0",
+    "ext-curl": "*",
+    "ext-openssl": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "classmap": [

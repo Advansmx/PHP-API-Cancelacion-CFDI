@@ -12,14 +12,15 @@ $ composer require advans/php-api-cancelacion-cfdi
 ## Ejemplo
 
 ````
-$advans = new \Advans\Api\CancelacionCFDI\Advans([
+$config = new \Advans\Api\CancelacionCFDI\Config([
     'endpoint' => 'https://dev.advans.mx/cfdi-cancelacion/json-rpc-2.0',
     'key' => '**********************',
     'use_exceptions' => false,
 ]);
+$servicio_cancelacion = new \Advans\Api\CancelacionCFDI\CancelacionCFDI($config);
 
 $Uuid = 'FFFFFFFF-23F0-BA48-CD4E-405E97430D31';
-$response = $advans->ConsultarEstadoSolicitud($Uuid);
+$response = $servicio_cancelacion->ConsultarEstadoSolicitud($Uuid);
 ````
 
 ## Configuración
@@ -28,4 +29,4 @@ $response = $advans->ConsultarEstadoSolicitud($Uuid);
 | :--- | :--- | :--- |
 | endpoint | null | URL de la API |
 | key | null | API Key |
-| use_exceptions | true | Define si una respuesta con error dispara un Exception
+| use_exceptions | true | Define si una respuesta con error dispara un Exception |
