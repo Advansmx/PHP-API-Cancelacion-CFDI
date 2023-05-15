@@ -5,12 +5,12 @@ namespace Advans\Api\CancelacionCFDI;
 
 use Exception;
 
-class Advans {
+class CancelacionCFDI {
 
-    protected $config = [];
+    protected Config $config;
 
     public function __construct($config) {
-        $this->config = array_merge(['use_exceptions' => true], $config);
+        $this->config = $config;
     }
 
     public function Cancelar($PrivateKeyPem, $PublicKeyPem, $Uuid, $RfcReceptor, $Total, $Motivo, $FolioSustitucion = '') {
