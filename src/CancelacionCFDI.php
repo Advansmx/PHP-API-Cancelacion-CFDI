@@ -16,12 +16,13 @@ class CancelacionCFDI {
     public function GetDefinition(){
         $curl = curl_init();
         curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => true,
             CURLOPT_URL => $this->config->endpoint,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
+            CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json; charset=utf-8',
                 'Authorization: ' . $this->config->key,
-            ),
+            ],
         ));
 
         $response = curl_exec($curl);
@@ -30,7 +31,6 @@ class CancelacionCFDI {
             throw new Exception('No se obtuvo respuesta');
         }
         $response = json_decode($response);
-
         if (isset($response->error)) {
             if ($this->config->use_exceptions) {
                 throw new Exception(@$response->error->code . ': ' . @$response->error->string);
