@@ -9,11 +9,11 @@ class Config {
 
     public function __construct($args) {
         $this->endpoint = $args['endpoint'] ?? null;
-        if (!$this->base_url) {
-            throw new Exception('base_url is required');
+        if (!$this->endpoint) {
+            throw new Exception('endpoint is required');
         }
-        if (substr($this->base_url, -1, 1) != '/') {
-            $this->base_url .= '/';
+        if (substr($this->endpoint, -1, 1) != '/') {
+            $this->endpoint .= '/';
         }
 
         $this->key = $args['key'] ?? null;
