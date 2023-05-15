@@ -38,6 +38,8 @@ class CancelacionCFDI {
                 return $response;
             }
         }
+
+        return $response;
     }
 
     public function Cancelar($PrivateKeyPem, $PublicKeyPem, $Uuid, $RfcReceptor, $Total, $Motivo, $FolioSustitucion = '') {
