@@ -13,11 +13,11 @@ class CancelacionCFDI {
         $this->config = $config;
     }
 
-    public function GetDefinition(){
+    public function GetDefinition() {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_URL => $this->config->endpoint,
+            CURLOPT_URL => $this->config->endpoint . 'json-rpc-2.0',
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json; charset=utf-8',
@@ -26,9 +26,10 @@ class CancelacionCFDI {
         ));
 
         $response = curl_exec($curl);
+        $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
-        if (!$response) {
-            throw new Exception('No se obtuvo respuesta');
+        if ($http_code != 200) {
+            throw new Exception('Se obtuvo respuesta con código ' . $http_code);
         }
         $response = json_decode($response);
         if (isset($response->error)) {
